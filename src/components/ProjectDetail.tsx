@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import type { Project } from "@/lib/projects";
 import { haptic } from "@/lib/haptics";
 
@@ -32,9 +33,12 @@ export function ProjectDetail({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Link href="/#work" className="back-link" onClick={() => haptic.tap()}>
-            ← All projects
-          </Link>
+          <div className="detail-top">
+            <Link href="/#work" className="back-link" onClick={() => haptic.tap()}>
+              ← All projects
+            </Link>
+            <ThemeSwitcher />
+          </div>
           <div className="detail-brand-row">
             <Image
               src={project.logo}

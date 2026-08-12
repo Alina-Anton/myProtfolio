@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Figtree, Manrope, Syne } from "next/font/google";
 import { AuroraBackground } from "@/components/AuroraBackground";
 import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -58,7 +57,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeProvider>
           <AuroraBackground />
           <div className="site-shell">
-            <Header />
             <main className="site-main">{children}</main>
             <Footer />
           </div>
