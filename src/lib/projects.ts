@@ -11,10 +11,20 @@ export type Project = {
   logo: string;
   demoVideo: string;
   screenshots: string[];
-  liveUrl?: string;
+  liveUrl: string;
   repoUrl?: string;
   features: string[];
 };
+
+export const categoryAccents: Record<string, string> = {
+  Simulation: "#0369A1",
+  Wellness: "#0F766E",
+  Lifestyle: "#B45309",
+};
+
+export function getCategoryAccent(category: string): string {
+  return categoryAccents[category] ?? "#0369A1";
+}
 
 export const projects: Project[] = [
   {
@@ -22,10 +32,10 @@ export const projects: Project[] = [
     name: "CodeQuest",
     tagline: "Interactive Frontend Developer Assessment Platform",
     description:
-      "An interactive learning adventure that turns programming concepts into quests, levels, and rewards — built for curious beginners and weekend warriors.",
+      "Interactive frontend engineering simulation featuring real-world coding challenges focused on debugging, performance optimization, accessibility, and state management.",
     longDescription:
       "CodeQuest is a ready-to-deploy interactive frontend engineering assessment platform built with React + TypeScript. It turns traditional coding assessments into a short, game-like engineering simulation where developers make real-world technical and product decisions.\n\nCandidates progress through challenges covering production debugging, React, performance optimization, accessibility, and product trade-offs, finishing with a scored engineering review.\n\nUnlike a static coding quiz or portfolio project, CodeQuest simulates how a frontend engineer thinks under realistic constraints.",
-    category: "Education",
+    category: "Simulation",
     stack: [
       "TypeScript",
       "Firebase",
@@ -35,7 +45,7 @@ export const projects: Project[] = [
       "Jest",
     ],
     year: "2025",
-    accent: "#0F766E",
+    accent: "#0369A1",
     logo: "/projects/codequest/logo.png",
     demoVideo:
       "https://drive.google.com/file/d/1l55vSfaB6E3wCFfWeVWn8enFnVUW2LYn/view?usp=sharing",
@@ -61,19 +71,28 @@ export const projects: Project[] = [
     name: "moodMap",
     tagline: "Visualize how you feel, day by day.",
     description:
-      "A calm journal that maps moods onto color, place, and time — helping you spot patterns without the noise of a heavy wellness app.",
+      "Self-awareness tool that helps users understand how their daily behaviors, habits, and environments affect their mood.",
     longDescription:
-      "moodMap turns daily check-ins into a living atlas of emotion. Soft interactions, private by default, and designed for glanceable reflection. Filter by week, place, or energy level and watch your personal weather become visible.",
+      "MoodMap is a self-awareness tool that helps users understand how their daily behaviors, habits, and environments affect their mood. Unlike traditional mood trackers, MoodMap focuses on pattern detection, actionable insights, and behavioral recommendations to help users improve their mental well-being. It also works as a searchable diary, where users can return to their notes, relive their days, and reflect on what felt important or special.",
     category: "Wellness",
     stack: ["React", "Firebase", "Charts", "PWA"],
     year: "2025",
-    accent: "#0369A1",
+    accent: "#0F766E",
     logo: "/projects/moodmap/logo.png",
     demoVideo: "/projects/moodmap/demo.mp4",
+    liveUrl: "https://moodmap-webapp.web.app/",
     screenshots: [
-      "/projects/moodmap/shot-1.svg",
-      "/projects/moodmap/shot-2.svg",
-      "/projects/moodmap/shot-3.svg",
+      "/projects/moodmap/shot-1.png",
+      "/projects/moodmap/shot-2.png",
+      "/projects/moodmap/shot-3.png",
+      "/projects/moodmap/shot-4.png",
+      "/projects/moodmap/shot-5.png",
+      "/projects/moodmap/shot-6.png",
+      "/projects/moodmap/shot-7.png",
+      "/projects/moodmap/shot-8.png",
+      "/projects/moodmap/shot-9.png",
+      "/projects/moodmap/shot-10.png",
+      "/projects/moodmap/shot-11.png",
     ],
     features: [
       "Color-coded mood atlas",
@@ -87,19 +106,22 @@ export const projects: Project[] = [
     name: "LuckPick",
     tagline: "Fair picks, fun spins, zero stress.",
     description:
-      "A decision helper for groups and solo moments — randomize, weight options, and settle choices with delightful motion.",
+      "A fun decision-making application that helps users overcome choice paralysis through customizable spinning wheels and interactive experiences.",
     longDescription:
-      "LuckPick is a lightweight picker for teams, friends, and indecisive nights. Create lists, set weights, spin with haptic feedback, and share results. Built to feel playful without looking gimmicky.",
+      "We all face those small daily dilemmas: What should I do today? Where should I go? What should I try next?\nThat’s where LuckPick comes in — turning decision-making into something fun, engaging, and even inspiring.\n\nLuckPick is a fun app that helps users make everyday decisions by spinning a customizable wheel. Instead of overthinking, you spin and get inspired with new ideas.\n\nI focused on building a smooth, interactive experience with dynamic state management and a clean, UX-driven design that keeps things simple but engaging.",
     category: "Lifestyle",
     stack: ["Next.js", "Framer Motion", "Firestore"],
     year: "2024",
     accent: "#B45309",
     logo: "/projects/luckpick/logo.png",
     demoVideo: "/projects/luckpick/demo.mp4",
+    liveUrl: "https://luckpickapp.web.app/",
     screenshots: [
-      "/projects/luckpick/shot-1.svg",
-      "/projects/luckpick/shot-2.svg",
-      "/projects/luckpick/shot-3.svg",
+      "/projects/luckpick/shot-1.png",
+      "/projects/luckpick/shot-2.png",
+      "/projects/luckpick/shot-3.png",
+      "/projects/luckpick/shot-4.png",
+      "/projects/luckpick/shot-5.png",
     ],
     features: [
       "Weighted random picks",
@@ -113,19 +135,26 @@ export const projects: Project[] = [
     name: "Jen's Collective",
     tagline: "A boutique collective for makers and makerspaces.",
     description:
-      "Brand site and member hub for Jen's Collective — showcasing craft, events, and a warm community storefront experience.",
+      "A private community platform used by my jiu-jitsu school to keep members connected, informed, and engaged through announcements, events, reservations, and member interactions.",
     longDescription:
-      "Jen's Collective needed a presence that feels handmade yet polished. The site highlights artisans, upcoming gatherings, and featured drops with editorial pacing and easy mobile browsing.",
-    category: "Wellness",
+      "Private community platform I built for GL West Jiu-Jitsu & Community to keep members connected, informed, and engaged.\n\nThe platform provides a simple way to share updates, manage events, and strengthen the community in one place.\n\nAlways rewarding to create something that solves a real need and brings people together.",
+    category: "Lifestyle",
     stack: ["Next.js", "CMS", "Stripe", "Firebase"],
     year: "2024",
-    accent: "#9F1239",
+    accent: "#B45309",
     logo: "/projects/jens-collective/logo.png",
     demoVideo: "/projects/jens-collective/demo.mp4",
+    liveUrl: "https://jenscollective-2026.web.app/",
     screenshots: [
-      "/projects/jens-collective/shot-1.svg",
-      "/projects/jens-collective/shot-2.svg",
-      "/projects/jens-collective/shot-3.svg",
+      "/projects/jens-collective/shot-1.png",
+      "/projects/jens-collective/shot-2.png",
+      "/projects/jens-collective/shot-3.png",
+      "/projects/jens-collective/shot-4.png",
+      "/projects/jens-collective/shot-5.png",
+      "/projects/jens-collective/shot-6.png",
+      "/projects/jens-collective/shot-7.png",
+      "/projects/jens-collective/shot-8.png",
+      "/projects/jens-collective/shot-9.png",
     ],
     features: [
       "Member & maker profiles",
@@ -139,15 +168,16 @@ export const projects: Project[] = [
     name: "recipeHub",
     tagline: "Cook better with shared kitchens.",
     description:
-      "A collaborative recipe library with step timing, shopping lists, and kitchen-mode UI that stays readable from arm’s length.",
+      "Your digital private recipe book — save your own recipes and family favorites in one place to keep traditional cuisine alive across generations.",
     longDescription:
       "recipeHub helps home cooks collect, remix, and share recipes without the clutter. Kitchen mode boosts contrast and type size; shopping lists sync across devices via Firebase.",
     category: "Lifestyle",
     stack: ["React", "Firebase", "Auth", "Storage"],
     year: "2025",
-    accent: "#15803D",
+    accent: "#B45309",
     logo: "/projects/recipehub/logo.png",
     demoVideo: "/projects/recipehub/demo.mp4",
+    liveUrl: "https://recipehub-webapp.web.app/",
     screenshots: [
       "/projects/recipehub/shot-1.svg",
       "/projects/recipehub/shot-2.svg",
@@ -165,15 +195,16 @@ export const projects: Project[] = [
     name: "NestCare",
     tagline: "Care coordination for modern households.",
     description:
-      "Schedules, reminders, and shared care notes for families and caregivers — calm UI, clear urgency, zero clutter.",
+      "A trusted, high-standard babysitting platform where families can book certified nannies instantly or in advance with clear availability and calm, reliable booking.",
     longDescription:
       "NestCare keeps households aligned on medications, appointments, and daily care tasks. Role-aware views, gentle reminders, and a trustworthy visual language designed for stressed moments.",
     category: "Wellness",
     stack: ["Next.js", "Firebase", "Notifications", "Auth"],
     year: "2025",
-    accent: "#1D4ED8",
+    accent: "#0F766E",
     logo: "/projects/nestcare/logo.png",
     demoVideo: "/projects/nestcare/demo.mp4",
+    liveUrl: "https://nestcare-webapp.web.app/",
     screenshots: [
       "/projects/nestcare/shot-1.svg",
       "/projects/nestcare/shot-2.svg",

@@ -678,10 +678,15 @@ input {
 }
 
 .about-section {
-  max-width: none;
   width: 100%;
   padding: 1.25rem 1.25rem 3rem;
   text-align: center;
+}
+
+.about-inner {
+  max-width: none;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .work-section {
@@ -823,19 +828,35 @@ html[data-theme="dark"] .project-name {
   min-width: 0;
 }
 
+.filter-chip[data-category] {
+  border-color: color-mix(
+    in oklab,
+    var(--category-accent) 55%,
+    var(--line)
+  );
+}
+
 .filter-chip-all {
   flex: 0.55 1 0;
   padding-inline: 0.4rem;
 }
 
-.filter-chip-education {
+.filter-chip-simulation {
   padding-inline: 0.7rem;
 }
 
 .filter-chip.is-active {
-  background: var(--accent-soft);
-  color: var(--accent-ink);
-  border-color: color-mix(in oklab, var(--accent) 35%, transparent);
+  background: color-mix(
+    in oklab,
+    var(--category-accent, var(--accent)) 16%,
+    transparent
+  );
+  color: var(--category-accent, var(--accent-ink));
+  border-color: color-mix(
+    in oklab,
+    var(--category-accent, var(--accent)) 55%,
+    transparent
+  );
 }
 
 @media (min-width: 480px) {
@@ -855,7 +876,7 @@ html[data-theme="dark"] .project-name {
     padding-inline: 0.7rem;
   }
 
-  .filter-chip-education {
+  .filter-chip-simulation {
     padding-inline: 1rem;
   }
 }
@@ -1002,12 +1023,6 @@ html[data-theme="dark"] .project-category {
   margin: 0;
   width: 100%;
   color: var(--fg-muted);
-}
-
-.about-inner {
-  max-width: none;
-  width: 100%;
-  margin-inline: auto;
 }
 
 .site-footer {

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import type { Project } from "@/lib/projects";
+import { getCategoryAccent, type Project } from "@/lib/projects";
 import { siteConfig } from "@/lib/site";
 import { haptic } from "@/lib/haptics";
 
@@ -94,7 +94,7 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
             "filter-chip",
             filter === cat ? "is-active" : "",
             cat === "All" ? "filter-chip-all" : "",
-            cat === "Education" ? "filter-chip-education" : "",
+            cat === "Simulation" ? "filter-chip-simulation" : "",
           ]
             .filter(Boolean)
             .join(" ");
@@ -104,6 +104,14 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
               key={cat}
               type="button"
               className={chipClass}
+              data-category={cat === "All" ? undefined : cat}
+              style={
+                cat === "All"
+                  ? undefined
+                  : {
+                      ["--category-accent" as string]: getCategoryAccent(cat),
+                    }
+              }
               onClick={() => {
                 haptic.select();
                 setFilter(cat);

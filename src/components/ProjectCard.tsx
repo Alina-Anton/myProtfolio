@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import type { Project } from "@/lib/projects";
+import { getCategoryAccent, type Project } from "@/lib/projects";
 import { haptic } from "@/lib/haptics";
 
 export function ProjectCard({
@@ -31,7 +31,9 @@ export function ProjectCard({
         delay: Math.min(index * 0.06, 0.3),
         ease: [0.22, 1, 0.36, 1],
       }}
-      style={{ ["--project-accent" as string]: project.accent }}
+      style={{
+        ["--project-accent" as string]: getCategoryAccent(project.category),
+      }}
       onPointerEnter={() => onArrowIntent?.(project.slug)}
       onPointerLeave={() => onArrowIntent?.(null)}
       onFocusCapture={() => onArrowIntent?.(project.slug)}

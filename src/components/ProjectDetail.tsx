@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import type { Project } from "@/lib/projects";
+import { getCategoryAccent, type Project } from "@/lib/projects";
 import { haptic } from "@/lib/haptics";
 
 export function ProjectDetail({ project }: { project: Project }) {
@@ -128,7 +128,9 @@ export function ProjectDetail({ project }: { project: Project }) {
   return (
     <article
       className="project-detail"
-      style={{ ["--project-accent" as string]: project.accent }}
+      style={{
+        ["--project-accent" as string]: getCategoryAccent(project.category),
+      }}
     >
       <div className="project-detail-hero">
         <Link
@@ -153,32 +155,28 @@ export function ProjectDetail({ project }: { project: Project }) {
               Stack: {project.stack.join(", ")}
             </p>
           </div>
-          {(project.liveUrl || hasWalkthroughVideo) && (
-            <div className="detail-actions">
-              {project.liveUrl ? (
-                <a
-                  href={project.liveUrl}
-                  className="detail-action-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => haptic.tap()}
-                >
-                  Try it live
-                </a>
-              ) : null}
-              {hasWalkthroughVideo ? (
-                <a
-                  href={project.demoVideo}
-                  className="detail-action-link is-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => haptic.tap()}
-                >
-                  Watch preview
-                </a>
-              ) : null}
-            </div>
-          )}
+          <div className="detail-actions">
+            <a
+              href={project.liveUrl}
+              className="detail-action-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => haptic.tap()}
+            >
+              Try it live
+            </a>
+            {hasWalkthroughVideo ? (
+              <a
+                href={project.demoVideo}
+                className="detail-action-link is-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => haptic.tap()}
+              >
+                Watch preview
+              </a>
+            ) : null}
+          </div>
         </motion.div>
       </div>
 
