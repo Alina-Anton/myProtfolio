@@ -75,7 +75,18 @@ export const projects: Project[] = [
     longDescription:
       "MoodMap is a self-awareness tool that helps users understand how their daily behaviors, habits, and environments affect their mood. Unlike traditional mood trackers, MoodMap focuses on pattern detection, actionable insights, and behavioral recommendations to help users improve their mental well-being. It also works as a searchable diary, where users can return to their notes, relive their days, and reflect on what felt important or special.",
     category: "Wellness",
-    stack: ["React", "Firebase", "Charts", "PWA"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Firebase",
+      "Firebase Hosting",
+      "FCM",
+      "Vite",
+      "Cloud Firestore",
+      "Authentication",
+      "Google Cloud",
+      "Google Sign-In",
+    ],
     year: "2025",
     accent: "#0F766E",
     logo: "/projects/moodmap/logo.png",
@@ -110,7 +121,7 @@ export const projects: Project[] = [
     longDescription:
       "We all face those small daily dilemmas: What should I do today? Where should I go? What should I try next?\nThat’s where LuckPick comes in — turning decision-making into something fun, engaging, and even inspiring.\n\nLuckPick is a fun app that helps users make everyday decisions by spinning a customizable wheel. Instead of overthinking, you spin and get inspired with new ideas.\n\nI focused on building a smooth, interactive experience with dynamic state management and a clean, UX-driven design that keeps things simple but engaging.",
     category: "Lifestyle",
-    stack: ["Next.js", "Framer Motion", "Firestore"],
+    stack: ["React", "TypeScript", "Firebase"],
     year: "2024",
     accent: "#B45309",
     logo: "/projects/luckpick/logo.png",
@@ -139,7 +150,7 @@ export const projects: Project[] = [
     longDescription:
       "Private community platform I built for GL West Jiu-Jitsu & Community to keep members connected, informed, and engaged.\n\nThe platform provides a simple way to share updates, manage events, and strengthen the community in one place.\n\nAlways rewarding to create something that solves a real need and brings people together.",
     category: "Lifestyle",
-    stack: ["Next.js", "CMS", "Stripe", "Firebase"],
+    stack: ["React", "TypeScript", "Firebase"],
     year: "2024",
     accent: "#B45309",
     logo: "/projects/jens-collective/logo.png",
@@ -170,9 +181,9 @@ export const projects: Project[] = [
     description:
       "Your digital private recipe book — save your own recipes and family favorites in one place to keep traditional cuisine alive across generations.",
     longDescription:
-      "recipeHub helps home cooks collect, remix, and share recipes without the clutter. Kitchen mode boosts contrast and type size; shopping lists sync across devices via Firebase.",
+      "recipeHub is a private digital recipe book for saving your own dishes and family favorites in one place. Add real photos of traditional meals, write detailed step-by-step instructions, and keep the recipes that matter close — so home cooking and heritage cuisine can be passed on across generations.",
     category: "Lifestyle",
-    stack: ["React", "Firebase", "Auth", "Storage"],
+    stack: ["React", "TypeScript", "Next.js", "Firebase"],
     year: "2025",
     accent: "#B45309",
     logo: "/projects/recipehub/logo.png",
@@ -197,9 +208,9 @@ export const projects: Project[] = [
     description:
       "A trusted, high-standard babysitting platform where families can book certified nannies instantly or in advance with clear availability and calm, reliable booking.",
     longDescription:
-      "NestCare keeps households aligned on medications, appointments, and daily care tasks. Role-aware views, gentle reminders, and a trustworthy visual language designed for stressed moments.",
+      "NestCare is an on-demand childcare platform that connects parents with trusted, certified, and background-checked nannies for immediate or scheduled care. Designed around safety, convenience, and peace of mind, NestCare combines smart matching, real-time availability, live tracking, and seamless booking to make finding reliable childcare as simple as ordering a ride.",
     category: "Wellness",
-    stack: ["Next.js", "Firebase", "Notifications", "Auth"],
+    stack: ["React", "TypeScript", "Firebase", "Stripe"],
     year: "2025",
     accent: "#0F766E",
     logo: "/projects/nestcare/logo.png",
