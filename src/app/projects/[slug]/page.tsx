@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectDetail } from "@/components/ProjectDetail";
-import {
-  getAdjacentProjects,
-  getProject,
-  projects,
-} from "@/lib/projects";
+import { getProject, projects } from "@/lib/projects";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -30,7 +26,5 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const { prev, next } = getAdjacentProjects(slug);
-
-  return <ProjectDetail project={project} prev={prev} next={next} />;
+  return <ProjectDetail project={project} />;
 }

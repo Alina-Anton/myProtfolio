@@ -2,24 +2,128 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import type { Project } from "@/lib/projects";
 import { haptic } from "@/lib/haptics";
 
-export function ProjectDetail({
-  project,
-  prev,
-  next,
-}: {
-  project: Project;
-  prev?: Project;
-  next?: Project;
-}) {
+export function ProjectDetail({ project }: { project: Project }) {
   const reduce = useReducedMotion();
-  const [activeShot, setActiveShot] = useState(0);
-  const [videoError, setVideoError] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [centerIndex, setCenterIndex] = useState(0);
+  const [scrollMetrics, setScrollMetrics] = useState({
+    progress: 0,
+    thumbRatio: 1,
+    canScroll: false,
+  });
+  const shotGridRef = useRef<HTMLDivElement>(null);
+  const draggingThumb = useRef(false);
+  const hasWalkthroughVideo = /^https?:\/\//.test(project.demoVideo);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLightboxIndex(null);
+      if (event.key === "ArrowRight") {
+        setLightboxIndex((i) =>
+          i === null ? null : (i + 1) % project.screenshots.length,
+        );
+      }
+      if (event.key === "ArrowLeft") {
+        setLightboxIndex((i) =>
+          i === null
+            ? null
+            : (i - 1 + project.screenshots.length) % project.screenshots.length,
+        );
+      }
+    };
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightboxIndex, project.screenshots.length]);
+
+  useEffect(() => {
+    const grid = shotGridRef.current;
+    if (!grid) return;
+
+    let frame = 0;
+
+    const updateCenter = () => {
+      const tiles = grid.querySelectorAll<HTMLElement>(".shot-tile");
+      if (!tiles.length) return;
+
+      const mid = grid.getBoundingClientRect().left + grid.clientWidth / 2;
+      let best = 0;
+      let bestDist = Number.POSITIVE_INFINITY;
+
+      tiles.forEach((tile, index) => {
+        const rect = tile.getBoundingClientRect();
+        const dist = Math.abs(rect.left + rect.width / 2 - mid);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = index;
+        }
+      });
+
+      setCenterIndex((current) => (current === best ? current : best));
+    };
+
+    const updateScrollbar = () => {
+      const maxScroll = grid.scrollWidth - grid.clientWidth;
+      const canScroll = maxScroll > 1;
+      const thumbRatio = canScroll
+        ? Math.min(1, grid.clientWidth / grid.scrollWidth)
+        : 1;
+      const progress = canScroll ? grid.scrollLeft / maxScroll : 0;
+
+      setScrollMetrics({
+        progress,
+        thumbRatio: Math.max(0.18, thumbRatio),
+        canScroll,
+      });
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        updateCenter();
+        updateScrollbar();
+      });
+    };
+
+    updateCenter();
+    updateScrollbar();
+    grid.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      grid.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [project.screenshots]);
+
+  const scrollFromThumbPosition = (clientX: number, track: HTMLElement) => {
+    const grid = shotGridRef.current;
+    if (!grid) return;
+
+    const rect = track.getBoundingClientRect();
+    const thumbWidth = rect.width * scrollMetrics.thumbRatio;
+    const usable = Math.max(1, rect.width - thumbWidth);
+    const x = Math.min(
+      Math.max(clientX - rect.left - thumbWidth / 2, 0),
+      usable,
+    );
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    grid.scrollLeft = (x / usable) * maxScroll;
+  };
 
   return (
     <article
@@ -27,71 +131,52 @@ export function ProjectDetail({
       style={{ ["--project-accent" as string]: project.accent }}
     >
       <div className="project-detail-hero">
+        <Link
+          href="/#work"
+          className="back-link"
+          onClick={() => haptic.tap()}
+        >
+          ← All projects
+        </Link>
+
         <motion.div
           className="project-detail-intro"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="detail-top">
-            <Link href="/#work" className="back-link" onClick={() => haptic.tap()}>
-              ← All projects
-            </Link>
-            <ThemeSwitcher />
+          <div className="detail-copy">
+            <h1>{project.name}</h1>
+            <p className="detail-tagline">{project.tagline}</p>
+            <p className="detail-desc">{project.longDescription}</p>
+            <p className="detail-stack">
+              Stack: {project.stack.join(", ")}
+            </p>
           </div>
-          <div className="detail-brand-row">
-            <Image
-              src={project.logo}
-              alt=""
-              width={64}
-              height={64}
-              className="detail-logo"
-            />
-            <div>
-              <p className="project-category">{project.category}</p>
-              <h1>{project.name}</h1>
-            </div>
-          </div>
-          <p className="detail-tagline">{project.tagline}</p>
-          <p className="detail-desc">{project.longDescription}</p>
-          <ul className="stack-list">
-            {project.stack.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </motion.div>
-
-        <motion.div
-          className="demo-panel"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p className="panel-label">Demo</p>
-          {!videoError ? (
-            <video
-              className="demo-video"
-              controls
-              playsInline
-              preload="metadata"
-              poster={project.screenshots[0]}
-              onError={() => setVideoError(true)}
-              onPlay={() => haptic.tap()}
-            >
-              <source src={project.demoVideo} type="video/mp4" />
-            </video>
-          ) : (
-            <div className="demo-fallback">
-              <Image
-                src={project.screenshots[0]}
-                alt={`${project.name} preview`}
-                fill
-                className="object-cover"
-              />
-              <p>
-                Drop a short MP4 at{" "}
-                <code>{project.demoVideo}</code> to enable the demo reel.
-              </p>
+          {(project.liveUrl || hasWalkthroughVideo) && (
+            <div className="detail-actions">
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  className="detail-action-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => haptic.tap()}
+                >
+                  Try it live
+                </a>
+              ) : null}
+              {hasWalkthroughVideo ? (
+                <a
+                  href={project.demoVideo}
+                  className="detail-action-link is-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => haptic.tap()}
+                >
+                  Watch preview
+                </a>
+              ) : null}
             </div>
           )}
         </motion.div>
@@ -99,93 +184,120 @@ export function ProjectDetail({
 
       <section className="shots-section" aria-labelledby="shots-heading">
         <div className="section-head compact">
-          <h2 id="shots-heading">Screenshots</h2>
-          <p>Swipe or tap through key frames from the product.</p>
+          <h2 id="shots-heading">In the product</h2>
+          <p>Scroll sideways — the center frame expands. Tap to enlarge.</p>
         </div>
 
-        <div className="shot-stage">
-          <AnimatePresence mode="wait">
+        <div className="shot-scroller">
+          <div className="shot-grid" ref={shotGridRef}>
+            {project.screenshots.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                className={
+                  centerIndex === i ? "shot-tile is-center" : "shot-tile"
+                }
+                aria-current={centerIndex === i ? "true" : undefined}
+                aria-label={`View ${project.name} screenshot ${i + 1}`}
+                onClick={() => {
+                  haptic.select();
+                  setLightboxIndex(i);
+                }}
+              >
+                <Image
+                  src={src}
+                  alt={`${project.name} screenshot ${i + 1}`}
+                  width={360}
+                  height={640}
+                />
+              </button>
+            ))}
+          </div>
+
+          {scrollMetrics.canScroll ? (
+            <div
+              className="shot-scrollbar"
+              role="scrollbar"
+              aria-orientation="horizontal"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(scrollMetrics.progress * 100)}
+              aria-label="Screenshot gallery"
+              onPointerDown={(event) => {
+                const track = event.currentTarget;
+                draggingThumb.current = true;
+                track.setPointerCapture(event.pointerId);
+                scrollFromThumbPosition(event.clientX, track);
+              }}
+              onPointerMove={(event) => {
+                if (!draggingThumb.current) return;
+                scrollFromThumbPosition(event.clientX, event.currentTarget);
+              }}
+              onPointerUp={(event) => {
+                draggingThumb.current = false;
+                event.currentTarget.releasePointerCapture(event.pointerId);
+              }}
+              onPointerCancel={() => {
+                draggingThumb.current = false;
+              }}
+            >
+              <div
+                className="shot-scrollbar-thumb"
+                style={{
+                  width: `${scrollMetrics.thumbRatio * 100}%`,
+                  left: `${scrollMetrics.progress * (1 - scrollMetrics.thumbRatio) * 100}%`,
+                }}
+              />
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {lightboxIndex !== null ? (
+          <motion.div
+            key="shot-lightbox"
+            className="shot-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${project.name} screenshot ${lightboxIndex + 1}`}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setLightboxIndex(null)}
+          >
+            <button
+              type="button"
+              className="shot-lightbox-close"
+              aria-label="Close screenshot"
+              onClick={() => {
+                haptic.tap();
+                setLightboxIndex(null);
+              }}
+            >
+              ×
+            </button>
             <motion.div
-              key={activeShot}
-              className="shot-frame"
-              initial={reduce ? false : { opacity: 0.4, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="shot-lightbox-frame"
+              initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(event) => event.stopPropagation()}
             >
               <Image
-                src={project.screenshots[activeShot]}
-                alt={`${project.name} screenshot ${activeShot + 1}`}
-                width={1280}
-                height={800}
-                className="shot-image"
+                src={project.screenshots[lightboxIndex]}
+                alt={`${project.name} screenshot ${lightboxIndex + 1}`}
+                width={1080}
+                height={1920}
+                className="shot-lightbox-image"
                 priority
               />
             </motion.div>
-          </AnimatePresence>
-        </div>
-
-        <div className="shot-thumbs" role="tablist" aria-label="Screenshots">
-          {project.screenshots.map((src, i) => (
-            <button
-              key={src}
-              type="button"
-              role="tab"
-              aria-selected={activeShot === i}
-              className={activeShot === i ? "shot-thumb is-active" : "shot-thumb"}
-              onClick={() => {
-                haptic.select();
-                setActiveShot(i);
-              }}
-            >
-              <Image src={src} alt="" width={220} height={140} />
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="features-section" aria-labelledby="features-heading">
-        <div className="section-head compact">
-          <h2 id="features-heading">Highlights</h2>
-          <p>What this build is designed to do well.</p>
-        </div>
-        <ul className="feature-list">
-          {project.features.map((feature, i) => (
-            <motion.li
-              key={feature}
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
-              {feature}
-            </motion.li>
-          ))}
-        </ul>
-      </section>
-
-      <nav className="project-pager" aria-label="Adjacent projects">
-        {prev && (
-          <Link
-            href={`/projects/${prev.slug}`}
-            className="pager-link"
-            onClick={() => haptic.open()}
-          >
-            <span>Previous</span>
-            <strong>{prev.name}</strong>
-          </Link>
-        )}
-        {next && (
-          <Link
-            href={`/projects/${next.slug}`}
-            className="pager-link next"
-            onClick={() => haptic.open()}
-          >
-            <span>Next</span>
-            <strong>{next.name}</strong>
-          </Link>
-        )}
-      </nav>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </article>
   );
 }

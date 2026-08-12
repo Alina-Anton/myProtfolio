@@ -20,21 +20,34 @@ export const projects: Project[] = [
   {
     slug: "codequest",
     name: "CodeQuest",
-    tagline: "Learn to code through quests and challenges.",
+    tagline: "Interactive Frontend Developer Assessment Platform",
     description:
       "An interactive learning adventure that turns programming concepts into quests, levels, and rewards — built for curious beginners and weekend warriors.",
     longDescription:
-      "CodeQuest gamifies the path from first variable to working apps. Learners unlock chapters, complete bite-sized challenges, and track progress with a clean quest map. The experience prioritizes momentum: short loops, clear feedback, and demos you can open in one tap.",
+      "CodeQuest is a ready-to-deploy interactive frontend engineering assessment platform built with React + TypeScript. It turns traditional coding assessments into a short, game-like engineering simulation where developers make real-world technical and product decisions.\n\nCandidates progress through challenges covering production debugging, React, performance optimization, accessibility, and product trade-offs, finishing with a scored engineering review.\n\nUnlike a static coding quiz or portfolio project, CodeQuest simulates how a frontend engineer thinks under realistic constraints.",
     category: "Education",
-    stack: ["Next.js", "TypeScript", "Firebase", "Tailwind"],
+    stack: [
+      "TypeScript",
+      "Firebase",
+      "Tailwind",
+      "Vite",
+      "ESLint",
+      "Jest",
+    ],
     year: "2025",
     accent: "#0F766E",
-    logo: "/projects/codequest/logo.svg",
-    demoVideo: "/projects/codequest/demo.mp4",
+    logo: "/projects/codequest/logo.png",
+    demoVideo:
+      "https://drive.google.com/file/d/1l55vSfaB6E3wCFfWeVWn8enFnVUW2LYn/view?usp=sharing",
+    liveUrl: "https://codequestsimulation.web.app/",
     screenshots: [
-      "/projects/codequest/shot-1.svg",
-      "/projects/codequest/shot-2.svg",
-      "/projects/codequest/shot-3.svg",
+      "/projects/codequest/shot-1.png",
+      "/projects/codequest/shot-2.png",
+      "/projects/codequest/shot-3.png",
+      "/projects/codequest/shot-4.png",
+      "/projects/codequest/shot-5.png",
+      "/projects/codequest/shot-6.png",
+      "/projects/codequest/shot-7.png",
     ],
     features: [
       "Quest-based learning paths",
@@ -55,7 +68,7 @@ export const projects: Project[] = [
     stack: ["React", "Firebase", "Charts", "PWA"],
     year: "2025",
     accent: "#0369A1",
-    logo: "/projects/moodmap/logo.svg",
+    logo: "/projects/moodmap/logo.png",
     demoVideo: "/projects/moodmap/demo.mp4",
     screenshots: [
       "/projects/moodmap/shot-1.svg",
@@ -81,7 +94,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "Framer Motion", "Firestore"],
     year: "2024",
     accent: "#B45309",
-    logo: "/projects/luckpick/logo.svg",
+    logo: "/projects/luckpick/logo.png",
     demoVideo: "/projects/luckpick/demo.mp4",
     screenshots: [
       "/projects/luckpick/shot-1.svg",
@@ -107,7 +120,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "CMS", "Stripe", "Firebase"],
     year: "2024",
     accent: "#9F1239",
-    logo: "/projects/jens-collective/logo.svg",
+    logo: "/projects/jens-collective/logo.png",
     demoVideo: "/projects/jens-collective/demo.mp4",
     screenshots: [
       "/projects/jens-collective/shot-1.svg",
@@ -133,7 +146,7 @@ export const projects: Project[] = [
     stack: ["React", "Firebase", "Auth", "Storage"],
     year: "2025",
     accent: "#15803D",
-    logo: "/projects/recipehub/logo.svg",
+    logo: "/projects/recipehub/logo.png",
     demoVideo: "/projects/recipehub/demo.mp4",
     screenshots: [
       "/projects/recipehub/shot-1.svg",
@@ -159,7 +172,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "Firebase", "Notifications", "Auth"],
     year: "2025",
     accent: "#1D4ED8",
-    logo: "/projects/nestcare/logo.svg",
+    logo: "/projects/nestcare/logo.png",
     demoVideo: "/projects/nestcare/demo.mp4",
     screenshots: [
       "/projects/nestcare/shot-1.svg",
@@ -177,13 +190,4 @@ export const projects: Project[] = [
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
-}
-
-export function getAdjacentProjects(slug: string) {
-  const index = projects.findIndex((p) => p.slug === slug);
-  if (index < 0) return { prev: undefined, next: undefined };
-  return {
-    prev: projects[(index - 1 + projects.length) % projects.length],
-    next: projects[(index + 1) % projects.length],
-  };
 }
