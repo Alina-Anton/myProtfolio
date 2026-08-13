@@ -11,8 +11,9 @@ export type Project = {
   logo: string;
   demoVideo: string;
   screenshots: string[];
-  liveUrl: string;
+  liveUrl?: string;
   repoUrl?: string;
+  status?: string;
   features: string[];
 };
 
@@ -188,12 +189,12 @@ export const projects: Project[] = [
     accent: "#B45309",
     logo: "/projects/recipehub/logo.png",
     demoVideo: "/projects/recipehub/demo.mp4",
-    liveUrl: "https://recipehub-webapp.web.app/",
+    liveUrl: "https://recipehub-web.web.app/",
     screenshots: [
-      "/projects/recipehub/shot-1.svg",
-      "/projects/recipehub/shot-2.svg",
-      "/projects/recipehub/shot-3.svg",
+      "/projects/recipehub/shot-1.png",
+      "/projects/recipehub/shot-2.png",
     ],
+    status: "In development",
     features: [
       "Shared recipe collections",
       "Kitchen display mode",
@@ -214,13 +215,19 @@ export const projects: Project[] = [
     year: "2025",
     accent: "#0F766E",
     logo: "/projects/nestcare/logo.png",
-    demoVideo: "/projects/nestcare/demo.mp4",
-    liveUrl: "https://nestcare-webapp.web.app/",
+    demoVideo:
+      "https://drive.google.com/file/d/1FWj0JnuHs-lQ8t7CRFzzQ1HCHFB1hyEO/view?usp=drivesdk",
     screenshots: [
-      "/projects/nestcare/shot-1.svg",
-      "/projects/nestcare/shot-2.svg",
-      "/projects/nestcare/shot-3.svg",
+      "/projects/nestcare/shot-1.png",
+      "/projects/nestcare/shot-2.png",
+      "/projects/nestcare/shot-3.png",
+      "/projects/nestcare/shot-4.png",
+      "/projects/nestcare/shot-5.png",
+      "/projects/nestcare/shot-6.png",
+      "/projects/nestcare/shot-7.png",
+      "/projects/nestcare/shot-8.png",
     ],
+    status: "In development",
     features: [
       "Shared care calendar",
       "Role-based access",

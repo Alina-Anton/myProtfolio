@@ -1079,9 +1079,27 @@ html[data-theme="dark"] .project-category {
 }
 
 .detail-copy {
+  display: grid;
+  gap: 0.65rem;
+  justify-items: center;
   min-width: 0;
   margin-bottom: 3.25rem;
   text-align: center;
+}
+
+.detail-status {
+  margin: 0.15rem 0 0;
+  color: #dc2626;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+html[data-theme="dark"] .detail-status {
+  color: #f87171;
 }
 
 .project-detail h1 {

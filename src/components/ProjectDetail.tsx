@@ -19,6 +19,9 @@ export function ProjectDetail({ project }: { project: Project }) {
   const shotGridRef = useRef<HTMLDivElement>(null);
   const draggingThumb = useRef(false);
   const hasWalkthroughVideo = /^https?:\/\//.test(project.demoVideo);
+  const hasLiveUrl =
+    project.slug !== "nestcare" &&
+    /^https?:\/\//.test(project.liveUrl ?? "");
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -154,29 +157,40 @@ export function ProjectDetail({ project }: { project: Project }) {
             <p className="detail-stack">
               Stack: {project.stack.join(", ")}
             </p>
-          </div>
-          <div className="detail-actions">
-            <a
-              href={project.liveUrl}
-              className="detail-action-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => haptic.tap()}
-            >
-              Try it live
-            </a>
-            {hasWalkthroughVideo ? (
-              <a
-                href={project.demoVideo}
-                className="detail-action-link is-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => haptic.tap()}
-              >
-                Watch preview
-              </a>
+            {project.status ? (
+              <p className="detail-status">{project.status}</p>
             ) : null}
           </div>
+          {(hasLiveUrl || hasWalkthroughVideo) ? (
+            <div className="detail-actions">
+              {hasLiveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  className="detail-action-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => haptic.tap()}
+                >
+                  Try it live
+                </a>
+              ) : null}
+              {hasWalkthroughVideo ? (
+                <a
+                  href={project.demoVideo}
+                  className={
+                    hasLiveUrl
+                      ? "detail-action-link is-secondary"
+                      : "detail-action-link"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => haptic.tap()}
+                >
+                  Watch preview
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </motion.div>
       </div>
 
