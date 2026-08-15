@@ -35,7 +35,7 @@ export const projects: Project[] = [
     description:
       "Interactive frontend engineering simulation featuring real-world coding challenges focused on debugging, performance optimization, accessibility, and state management.",
     longDescription:
-      "CodeQuest is a ready-to-deploy interactive frontend engineering assessment platform built with React + TypeScript. It turns traditional coding assessments into a short, game-like engineering simulation where developers make real-world technical and product decisions.\n\nCandidates progress through challenges covering production debugging, React, performance optimization, accessibility, and product trade-offs, finishing with a scored engineering review.\n\nUnlike a static coding quiz or portfolio project, CodeQuest simulates how a frontend engineer thinks under realistic constraints.",
+      "CodeQuest turns traditional coding assessments into a short, game-like engineering simulation where developers make real-world technical and product decisions.\nCandidates progress through challenges covering production debugging, React, performance optimization, accessibility, and product trade-offs, finishing with a scored engineering review.\nUnlike a static coding quiz or portfolio project, CodeQuest simulates how a frontend engineer thinks under realistic constraints.",
     category: "Simulation",
     stack: [
       "TypeScript",
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     description:
       "A fun decision-making application that helps users overcome choice paralysis through customizable spinning wheels and interactive experiences.",
     longDescription:
-      "We all face those small daily dilemmas: What should I do today? Where should I go? What should I try next?\nThat’s where LuckPick comes in — turning decision-making into something fun, engaging, and even inspiring.\n\nLuckPick is a fun app that helps users make everyday decisions by spinning a customizable wheel. Instead of overthinking, you spin and get inspired with new ideas.\n\nI focused on building a smooth, interactive experience with dynamic state management and a clean, UX-driven design that keeps things simple but engaging.",
+      "We all face those small daily dilemmas: What should I do today? Where should I go? What should I try next?\nThat’s where LuckPick comes in — turning decision-making into something fun, engaging, and even inspiring.\nLuckPick is a fun app that helps users make everyday decisions by spinning a customizable wheel. Instead of overthinking, you spin and get inspired with new ideas.\nI focused on building a smooth, interactive experience with dynamic state management and a clean, UX-driven design that keeps things simple but engaging.",
     category: "Lifestyle",
     stack: ["React", "TypeScript", "Firebase"],
     year: "2024",
@@ -145,11 +145,12 @@ export const projects: Project[] = [
   {
     slug: "jens-collective",
     name: "Jen's Collective",
-    tagline: "A boutique collective for makers and makerspaces.",
+    tagline:
+      "Private community platform for GL West Jiu-Jitsu & Community.",
     description:
       "A private community platform used by my jiu-jitsu school to keep members connected, informed, and engaged through announcements, events, reservations, and member interactions.",
     longDescription:
-      "Private community platform I built for GL West Jiu-Jitsu & Community to keep members connected, informed, and engaged.\n\nThe platform provides a simple way to share updates, manage events, and strengthen the community in one place.\n\nAlways rewarding to create something that solves a real need and brings people together.",
+      "A welcoming place where members stay connected through announcements, events, reservations, and everyday interactions - all in one shared space built for the school community.\nThe platform provides a simple way to share updates, manage events, and strengthen the community in one place. Always rewarding to create something that solves a real need and brings people together.",
     category: "Lifestyle",
     stack: ["React", "TypeScript", "Firebase"],
     year: "2024",
