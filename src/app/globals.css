@@ -1386,13 +1386,35 @@ html[data-theme="dark"] .detail-status {
   object-fit: contain;
 }
 
+/* ── Landscape (laptop-screen) variant ─────────────────────────── */
+.shot-scroller:has(.shot-tile--landscape) {
+  --shot-tile-w: 28rem;
+}
+
+.shot-tile--landscape {
+  aspect-ratio: 16 / 9;
+}
+
+.shot-lightbox-frame:has(.shot-lightbox-image--landscape) {
+  width: min(92vw, 900px, calc(92vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+}
+
 @media (min-width: 720px) {
   .shot-scroller {
     --shot-tile-w: 12.5rem;
   }
 
+  .shot-scroller:has(.shot-tile--landscape) {
+    --shot-tile-w: 34rem;
+  }
+
   .shot-lightbox-frame {
     width: min(92vw, 480px, calc(92vh * 9 / 19.5));
+  }
+
+  .shot-lightbox-frame:has(.shot-lightbox-image--landscape) {
+    width: min(92vw, 900px, calc(92vh * 16 / 9));
   }
 }
 

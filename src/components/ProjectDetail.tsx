@@ -194,76 +194,91 @@ export function ProjectDetail({ project }: { project: Project }) {
         </motion.div>
       </div>
 
-      <section className="shots-section" aria-labelledby="shots-heading">
-        <div className="section-head compact">
-          <h2 id="shots-heading">In the product</h2>
-          <p>Scroll sideways — the center frame expands. Tap to enlarge.</p>
-        </div>
-
-        <div className="shot-scroller">
-          <div className="shot-grid" ref={shotGridRef}>
-            {project.screenshots.map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                className={
-                  centerIndex === i ? "shot-tile is-center" : "shot-tile"
-                }
-                aria-current={centerIndex === i ? "true" : undefined}
-                aria-label={`View ${project.name} screenshot ${i + 1}`}
-                onClick={() => {
-                  haptic.select();
-                  setLightboxIndex(i);
-                }}
-              >
-                <Image
-                  src={src}
-                  alt={`${project.name} screenshot ${i + 1}`}
-                  width={360}
-                  height={640}
-                />
-              </button>
-            ))}
+      {project.screenshots.length ? (
+        <section className="shots-section" aria-labelledby="shots-heading">
+          <div className="section-head compact">
+            <h2 id="shots-heading">In the product</h2>
+            <p>Scroll sideways — the center frame expands. Tap to enlarge.</p>
           </div>
 
-          {scrollMetrics.canScroll ? (
+          <div className="shot-scroller">
             <div
-              className="shot-scrollbar"
-              role="scrollbar"
-              aria-orientation="horizontal"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={Math.round(scrollMetrics.progress * 100)}
-              aria-label="Screenshot gallery"
-              onPointerDown={(event) => {
-                const track = event.currentTarget;
-                draggingThumb.current = true;
-                track.setPointerCapture(event.pointerId);
-                scrollFromThumbPosition(event.clientX, track);
-              }}
-              onPointerMove={(event) => {
-                if (!draggingThumb.current) return;
-                scrollFromThumbPosition(event.clientX, event.currentTarget);
-              }}
-              onPointerUp={(event) => {
-                draggingThumb.current = false;
-                event.currentTarget.releasePointerCapture(event.pointerId);
-              }}
-              onPointerCancel={() => {
-                draggingThumb.current = false;
-              }}
+              className={
+                project.landscapeScreenshots
+                  ? "shot-grid shot-grid--landscape"
+                  : "shot-grid"
+              }
+              ref={shotGridRef}
             >
-              <div
-                className="shot-scrollbar-thumb"
-                style={{
-                  width: `${scrollMetrics.thumbRatio * 100}%`,
-                  left: `${scrollMetrics.progress * (1 - scrollMetrics.thumbRatio) * 100}%`,
-                }}
-              />
+              {project.screenshots.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  className={
+                    centerIndex === i
+                      ? project.landscapeScreenshots
+                        ? "shot-tile shot-tile--landscape is-center"
+                        : "shot-tile is-center"
+                      : project.landscapeScreenshots
+                        ? "shot-tile shot-tile--landscape"
+                        : "shot-tile"
+                  }
+                  aria-current={centerIndex === i ? "true" : undefined}
+                  aria-label={`View ${project.name} screenshot ${i + 1}`}
+                  onClick={() => {
+                    haptic.select();
+                    setLightboxIndex(i);
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt={`${project.name} screenshot ${i + 1}`}
+                    width={project.landscapeScreenshots ? 960 : 360}
+                    height={project.landscapeScreenshots ? 540 : 640}
+                  />
+                </button>
+              ))}
             </div>
-          ) : null}
-        </div>
-      </section>
+
+            {scrollMetrics.canScroll ? (
+              <div
+                className="shot-scrollbar"
+                role="scrollbar"
+                aria-orientation="horizontal"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(scrollMetrics.progress * 100)}
+                aria-label="Screenshot gallery"
+                onPointerDown={(event) => {
+                  const track = event.currentTarget;
+                  draggingThumb.current = true;
+                  track.setPointerCapture(event.pointerId);
+                  scrollFromThumbPosition(event.clientX, track);
+                }}
+                onPointerMove={(event) => {
+                  if (!draggingThumb.current) return;
+                  scrollFromThumbPosition(event.clientX, event.currentTarget);
+                }}
+                onPointerUp={(event) => {
+                  draggingThumb.current = false;
+                  event.currentTarget.releasePointerCapture(event.pointerId);
+                }}
+                onPointerCancel={() => {
+                  draggingThumb.current = false;
+                }}
+              >
+                <div
+                  className="shot-scrollbar-thumb"
+                  style={{
+                    width: `${scrollMetrics.thumbRatio * 100}%`,
+                    left: `${scrollMetrics.progress * (1 - scrollMetrics.thumbRatio) * 100}%`,
+                  }}
+                />
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       <AnimatePresence>
         {lightboxIndex !== null ? (
@@ -301,9 +316,13 @@ export function ProjectDetail({ project }: { project: Project }) {
               <Image
                 src={project.screenshots[lightboxIndex]}
                 alt={`${project.name} screenshot ${lightboxIndex + 1}`}
-                width={1080}
-                height={1920}
-                className="shot-lightbox-image"
+                width={project.landscapeScreenshots ? 1920 : 1080}
+                height={project.landscapeScreenshots ? 1080 : 1920}
+                className={
+                  project.landscapeScreenshots
+                    ? "shot-lightbox-image shot-lightbox-image--landscape"
+                    : "shot-lightbox-image"
+                }
                 priority
               />
             </motion.div>

@@ -11,6 +11,7 @@ export type Project = {
   logo: string;
   demoVideo: string;
   screenshots: string[];
+  landscapeScreenshots?: boolean;
   liveUrl?: string;
   repoUrl?: string;
   status?: string;
@@ -19,6 +20,7 @@ export type Project = {
 
 export const categoryAccents: Record<string, string> = {
   Simulation: "#0369A1",
+  Security: "#64748B",
   Wellness: "#0F766E",
   Lifestyle: "#B45309",
 };
@@ -28,6 +30,35 @@ export function getCategoryAccent(category: string): string {
 }
 
 export const projects: Project[] = [
+  {
+    slug: "greymatter",
+    name: "GreyMatter",
+    tagline: "Agentic security operations from one place.",
+    description:
+      "Security Operations Platform that sits across your existing tech stack and processes, making every part of your defense agentic from one place.",
+    longDescription:
+      "Attackers are using AI to gain speed, scale, and the ability to execute sophisticated attacks without deep expertise. GreyMatter allows defenders to harness the power of AI to receive those same benefits.\nDetect threats, run investigations, hunt proactively, and execute response across the entire tech stack at machine speed, in plain language, without requiring expertise in every tool they own.",
+    category: "Security",
+    stack: ["TypeScript", "React", "ESLint", "Jest"],
+    year: "2026",
+    accent: "#64748B",
+    logo: "/projects/greymatter/logo.png",
+    liveUrl: "https://reliaquest.com/request-a-demo/",
+    demoVideo: "https://reliaquest.com/campaigns/greymatter/what-is-greymatter-the-agentic-ai-secops-platform",
+    screenshots: [
+      "/projects/greymatter/shot-4.png",
+      "/projects/greymatter/shot-3.png",
+      "/projects/greymatter/shot-2.png",
+      "/projects/greymatter/shot-1.png",
+    ],
+    landscapeScreenshots: true,
+    features: [
+      "AI-powered threat detection",
+      "Machine-speed investigations",
+      "Proactive threat hunting",
+      "Cross-stack response",
+    ],
+  },
   {
     slug: "codequest",
     name: "CodeQuest",
