@@ -893,14 +893,15 @@ html[data-theme="dark"] .project-name {
 
 .project-link {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 3.25rem 1fr;
+  grid-template-rows: 3.25rem auto;
   grid-template-areas:
     "logo heading"
-    "desc desc";
+    ". desc";
   column-gap: 0.85rem;
   row-gap: 0.75rem;
   padding: 1.25rem 0.15rem;
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 
@@ -909,7 +910,7 @@ html[data-theme="dark"] .project-name {
   width: 3.25rem;
   height: 3.25rem;
   border-radius: 0.9rem;
-  align-self: center;
+  align-self: start;
   object-fit: cover;
   object-position: center;
   background: color-mix(in oklab, var(--bg-elevated) 80%, transparent);
@@ -940,6 +941,7 @@ html[data-theme="dark"] .project-logo {
   gap: 0.75rem;
   width: 100%;
   min-width: 0;
+  height: 3.25rem;
 }
 
 .project-heading-text {

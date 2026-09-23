@@ -21,6 +21,7 @@ export type Project = {
 export const categoryAccents: Record<string, string> = {
   Simulation: "#0369A1",
   Security: "#64748B",
+  Operations: "#EAB308",
   Wellness: "#0F766E",
   Lifestyle: "#B45309",
 };
@@ -30,6 +31,33 @@ export function getCategoryAccent(category: string): string {
 }
 
 export const projects: Project[] = [
+  {
+    slug: "vendgo",
+    name: "VendGo",
+    tagline: "Know what's broken. Fix it faster. Stop losing revenue.",
+    description:
+      "Operations platform for companies that own and service vending machines, air pumps, vacuum stations, and tire-inflation machines — one place to know what's broken, fix it faster, and stop losing revenue.",
+    longDescription:
+      "VendGO is the operations control center for machine fleets at gas stations, car washes, and similar sites. It connects work that operators otherwise manage through phone calls, spreadsheets, texts, accounting software, and separate apps.\nA typical workflow: a customer finds a broken machine, scans a QR code or texts, VendGO creates an issue, a technician is notified, repairs and parts are recorded, inventory updates, and refunds or credits can flow into QuickBooks. It also watches sales data—if a normally active machine goes silent, VendGO flags it and prioritizes it by estimated lost revenue. Nayax still handles payments and telemetry; VendGO takes that information and runs the operational side: reports, repairs, refunds, parts, and invoicing.",
+    category: "Operations",
+    stack: ["Next.js", "TypeScript", "React"],
+    year: "2026",
+    accent: "#EAB308",
+    logo: "/projects/vendgo/logo.png",
+    demoVideo: "",
+    screenshots: [
+      "/projects/vendgo/shot-1.png",
+      "/projects/vendgo/shot-2.png",
+    ],
+    landscapeScreenshots: true,
+    status: "In development",
+    features: [
+      "Issue intake from QR or text",
+      "Technician dispatch and parts logging",
+      "Silent-machine revenue alerts",
+      "Nayax + QuickBooks operations flow",
+    ],
+  },
   {
     slug: "greymatter",
     name: "GreyMatter",
@@ -44,7 +72,8 @@ export const projects: Project[] = [
     accent: "#64748B",
     logo: "/projects/greymatter/logo.png",
     liveUrl: "https://reliaquest.com/request-a-demo/",
-    demoVideo: "https://reliaquest.com/campaigns/greymatter/what-is-greymatter-the-agentic-ai-secops-platform",
+    demoVideo:
+      "https://reliaquest.com/campaigns/greymatter/what-is-greymatter-the-agentic-ai-secops-platform",
     screenshots: [
       "/projects/greymatter/shot-4.png",
       "/projects/greymatter/shot-3.png",
@@ -68,14 +97,7 @@ export const projects: Project[] = [
     longDescription:
       "CodeQuest turns traditional coding assessments into a short, game-like engineering simulation where developers make real-world technical and product decisions.\nCandidates progress through challenges covering production debugging, React, performance optimization, accessibility, and product trade-offs, finishing with a scored engineering review.\nUnlike a static coding quiz or portfolio project, CodeQuest simulates how a frontend engineer thinks under realistic constraints.",
     category: "Simulation",
-    stack: [
-      "TypeScript",
-      "Firebase",
-      "Tailwind",
-      "Vite",
-      "ESLint",
-      "Jest",
-    ],
+    stack: ["TypeScript", "Firebase", "Tailwind", "Vite", "ESLint", "Jest"],
     year: "2025",
     accent: "#0369A1",
     logo: "/projects/codequest/logo.png",
@@ -176,8 +198,7 @@ export const projects: Project[] = [
   {
     slug: "jens-collective",
     name: "Jen's Collective",
-    tagline:
-      "Private community platform for GL West Jiu-Jitsu & Community.",
+    tagline: "Private community platform for GL West Jiu-Jitsu & Community.",
     description:
       "A private community platform used by my jiu-jitsu school to keep members connected, informed, and engaged through announcements, events, reservations, and member interactions.",
     longDescription:
