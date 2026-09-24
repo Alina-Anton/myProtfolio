@@ -48,6 +48,7 @@ export const projects: Project[] = [
     screenshots: [
       "/projects/vendgo/shot-1.png",
       "/projects/vendgo/shot-2.png",
+      "/projects/vendgo/shot-3.png",
     ],
     landscapeScreenshots: true,
     status: "In development",
@@ -167,35 +168,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "luckpick",
-    name: "LuckPick",
-    tagline: "Fair picks, fun spins, zero stress.",
-    description:
-      "A fun decision-making application that helps users overcome choice paralysis through customizable spinning wheels and interactive experiences.",
-    longDescription:
-      "We all face those small daily dilemmas: What should I do today? Where should I go? What should I try next?\nThat’s where LuckPick comes in — turning decision-making into something fun, engaging, and even inspiring.\nLuckPick is a fun app that helps users make everyday decisions by spinning a customizable wheel. Instead of overthinking, you spin and get inspired with new ideas.\nI focused on building a smooth, interactive experience with dynamic state management and a clean, UX-driven design that keeps things simple but engaging.",
-    category: "Lifestyle",
-    stack: ["React", "TypeScript", "Firebase"],
-    year: "2024",
-    accent: "#B45309",
-    logo: "/projects/luckpick/logo.png",
-    demoVideo: "/projects/luckpick/demo.mp4",
-    liveUrl: "https://luckpickapp.web.app/",
-    screenshots: [
-      "/projects/luckpick/shot-1.png",
-      "/projects/luckpick/shot-2.png",
-      "/projects/luckpick/shot-3.png",
-      "/projects/luckpick/shot-4.png",
-      "/projects/luckpick/shot-5.png",
-    ],
-    features: [
-      "Weighted random picks",
-      "Shareable result links",
-      "Haptic spin feedback",
-      "Group session mode",
-    ],
-  },
-  {
     slug: "jens-collective",
     name: "Jen's Collective",
     tagline: "Private community platform for GL West Jiu-Jitsu & Community.",
@@ -229,33 +201,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "recipehub",
-    name: "recipeHub",
-    tagline: "Cook better with shared kitchens.",
-    description:
-      "Your digital private recipe book — save your own recipes and family favorites in one place to keep traditional cuisine alive across generations.",
-    longDescription:
-      "recipeHub is a private digital recipe book for saving your own dishes and family favorites in one place. Add real photos of traditional meals, write detailed step-by-step instructions, and keep the recipes that matter close — so home cooking and heritage cuisine can be passed on across generations.",
-    category: "Lifestyle",
-    stack: ["React", "TypeScript", "Next.js", "Firebase"],
-    year: "2025",
-    accent: "#B45309",
-    logo: "/projects/recipehub/logo.png",
-    demoVideo: "/projects/recipehub/demo.mp4",
-    liveUrl: "https://recipehub-web.web.app/",
-    screenshots: [
-      "/projects/recipehub/shot-1.png",
-      "/projects/recipehub/shot-2.png",
-    ],
-    status: "In development",
-    features: [
-      "Shared recipe collections",
-      "Kitchen display mode",
-      "Smart shopping lists",
-      "Step timers & notes",
-    ],
-  },
-  {
     slug: "nestcare",
     name: "NestCare",
     tagline: "Care coordination for modern households.",
@@ -286,6 +231,62 @@ export const projects: Project[] = [
       "Role-based access",
       "Gentle reminder system",
       "Secure notes & history",
+    ],
+  },
+  {
+    slug: "recipehub",
+    name: "recipeHub",
+    tagline: "Cook better with shared kitchens.",
+    description:
+      "Your digital private recipe book — save your own recipes and family favorites in one place to keep traditional cuisine alive across generations.",
+    longDescription:
+      "recipeHub is a private digital recipe book for saving your own dishes and family favorites in one place. Add real photos of traditional meals, write detailed step-by-step instructions, and keep the recipes that matter close — so home cooking and heritage cuisine can be passed on across generations.",
+    category: "Lifestyle",
+    stack: ["React", "TypeScript", "Next.js", "Firebase"],
+    year: "2025",
+    accent: "#B45309",
+    logo: "/projects/recipehub/logo.png",
+    demoVideo: "/projects/recipehub/demo.mp4",
+    liveUrl: "https://recipehub-web.web.app/",
+    screenshots: [
+      "/projects/recipehub/shot-1.png",
+      "/projects/recipehub/shot-2.png",
+    ],
+    status: "In development",
+    features: [
+      "Shared recipe collections",
+      "Kitchen display mode",
+      "Smart shopping lists",
+      "Step timers & notes",
+    ],
+  },
+  {
+    slug: "luckpick",
+    name: "LuckPick",
+    tagline: "Fair picks, fun spins, zero stress.",
+    description:
+      "A fun decision-making application that helps users overcome choice paralysis through customizable spinning wheels and interactive experiences.",
+    longDescription:
+      "We all face those small daily dilemmas: What should I do today? Where should I go? What should I try next?\nThat’s where LuckPick comes in — turning decision-making into something fun, engaging, and even inspiring.\nLuckPick is a fun app that helps users make everyday decisions by spinning a customizable wheel. Instead of overthinking, you spin and get inspired with new ideas.\nI focused on building a smooth, interactive experience with dynamic state management and a clean, UX-driven design that keeps things simple but engaging.",
+    category: "Lifestyle",
+    stack: ["React", "TypeScript", "Firebase"],
+    year: "2024",
+    accent: "#B45309",
+    logo: "/projects/luckpick/logo.png",
+    demoVideo: "/projects/luckpick/demo.mp4",
+    liveUrl: "https://luckpickapp.web.app/",
+    screenshots: [
+      "/projects/luckpick/shot-1.png",
+      "/projects/luckpick/shot-2.png",
+      "/projects/luckpick/shot-3.png",
+      "/projects/luckpick/shot-4.png",
+      "/projects/luckpick/shot-5.png",
+    ],
+    features: [
+      "Weighted random picks",
+      "Shareable result links",
+      "Haptic spin feedback",
+      "Group session mode",
     ],
   },
 ];

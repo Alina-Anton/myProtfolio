@@ -141,7 +141,10 @@ export function ProjectDetail({ project }: { project: Project }) {
           className="back-link"
           onClick={() => haptic.tap()}
         >
-          ← All projects
+          <span className="back-link-chevron" aria-hidden>
+            &lt;
+          </span>
+          All projects
         </Link>
 
         <motion.div
